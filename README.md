@@ -1,67 +1,66 @@
-# depth_estimation
-Single Image Depth Estimation
+# Deep Learning for Image and Video Processing - Final Project
 
-Overview
+## Single Image Depth Estimation
 
-This project focuses on Single Image Depth Estimation (monocular depth estimation), which involves predicting the depth value for every pixel in an RGB image. This task is crucial in fields like autonomous vehicles, robotics, and augmented reality, and is particularly challenging due to the high variability in image structure and composition.
+### Academic Year: 2023-2024
 
-Datasets Used
+**Author: Ismael Gómez Garrido (i6334270)**
 
-NYU Depth V2: A dataset containing 1449 indoor RGB images with depth maps, used for initial training.
+### Project Overview
+This project focuses on **Single Image Depth Estimation**, a challenging task in computer vision aimed at estimating the depth value for each pixel of an RGB image. Depth estimation algorithms are critical for applications in autonomous vehicles, robotics, augmented and virtual reality, and medical imaging. This report explores and compares different models and methodologies for depth estimation "in the wild," where images come with diverse structures and compositions.
 
-Depth in the Wild (DIW): A dataset of 500,000 images with depth relationships between point pairs, which adds a significant challenge to depth estimation due to its variability.
+### Table of Contents
+1. [Introduction](#introduction)
+2. [Related Work](#related-work)
+3. [Data](#data)
+   - NYU Depth V2
+   - Depth in the Wild (DIW)
+4. [Methodology](#methodology)
+   - Data Preprocessing
+   - Training Process
+   - Model I: U-Net++
+   - Model II: Transfer Learning with LR-ASPP
+   - Metrics
+5. [Experiments & Results](#experiments--results)
+   - LR-ASPP
+   - U-Net++
+   - Comparison
+6. [Conclusions & Possible Improvements](#conclusions--possible-improvements)
+7. [References](#references)
 
-Methodology
+### Introduction
+**Single Image Depth Estimation** or **Monocular Depth Estimation** aims to estimate depth values for each pixel of an RGB image. This project involves training models to perform this estimation effectively using images with varying structures and elements, requiring a high level of generalization.
 
-The approach involves data preprocessing to resize images for efficient training and the use of transfer learning to overcome computational constraints. Two models were implemented:
+### Related Work
+There has been substantial progress in monocular depth estimation. Early methods used superpixel grouping, while modern approaches leverage encoder-decoder architectures and, more recently, vision transformers and diffusion models.
 
-U-Net++: A popular encoder-decoder architecture used for semantic segmentation, pretrained with ResNeXt50 weights.
+### Data
+Two datasets were used:
+- **NYU Depth V2**: A widely-used benchmark dataset consisting of indoor scenes captured with RGB and Depth cameras.
+- **Depth in the Wild (DIW)**: A challenging dataset with images gathered from Flickr, annotated only with relative depth between pairs of points.
 
-LR-ASPP: A lightweight architecture combining MobileNetV3 and Atrous Spatial Pyramid Pooling to improve feature extraction efficiency.
+### Methodology
+- **Data Preprocessing**: Both datasets were resized to 200x200 resolution for computational efficiency.
+- **Training Process**: Models were trained on NYU Depth V2 before fine-tuning with DIW, using pre-trained models to reduce training time.
+- **Models**:
+  - **U-Net++**: A widely-used architecture for semantic segmentation, adapted here for depth estimation.
+  - **Transfer Learning with LR-ASPP**: A lightweight model leveraging MobileNetV3 for object detection and segmentation.
+- **Metrics**: Mean Squared Error (MSE) was used for evaluating performance on NYU, while accuracy was used for DIW.
 
-Results
+### Experiments & Results
+The experiments compared the performance of the two models:
+- **U-Net++** achieved better depth estimation results compared to **LR-ASPP**.
+- **NYU Test MSE Loss**: LR-ASPP - 0.058, U-Net++ - 0.032
+- **DIW Test Accuracy**: LR-ASPP - 58.4%, U-Net++ - 65.32%
 
-U-Net++ outperformed LR-ASPP in both datasets, achieving lower loss and higher accuracy in depth prediction.
+### Conclusions & Possible Improvements
+The significant difference in model performance was attributed to the larger number of parameters in U-Net++, which allowed it to capture more information. Future work could focus on comparing architectures with similar parameter counts or exploring vision transformers and diffusion models for improved results.
 
-NYU Dataset: U-Net++ achieved a lower Mean Squared Error (MSE) of 0.032 compared to LR-ASPP's 0.058.
+### References
+- Oquab, M., et al. "DINOv2: Learning Robust Visual Features without Supervision." arXiv, 2023.
+- Mertan, A., et al. "Single Image Depth Estimation: An Overview." Digital Signal Processing, 2021.
+- And more (refer to the original report).
 
-DIW Dataset: U-Net++ achieved a test accuracy of 65.32%, while LR-ASPP achieved 58.4%.
+---
 
-Conclusions
-
-The number of parameters played a key role in the performance difference between the models. U-Net++ was able to better capture depth information, while LR-ASPP struggled due to its smaller size. Future work includes testing models with similar parameter counts or experimenting with vision transformers and diffusion models for further improvement.
-
-How to Run the Project
-
-Clone the repository:
-
-git clone <repository-url>
-
-Navigate to the project directory:
-
-cd single_image_depth_estimation
-
-Install the required dependencies:
-
-pip install -r requirements.txt
-
-Run the training script:
-
-python train.py
-
-Dependencies
-
-Python 3.8+
-
-PyTorch
-
-NumPy
-
-OpenCV
-
-scikit-learn
-
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
+Feel free to adapt this README to match your preferences or add any additional sections.
