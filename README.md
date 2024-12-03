@@ -1,6 +1,6 @@
-# Single Image Depth Estimation (20232024)
+# Single Image Depth Estimation
 
-This project was part of the masters course: Deep Learning for Image and Video Processing at Maastricht University
+This project was part of the masters course: Deep Learning for Image and Video Processing at Maastricht University (2023 / 2024)
 
 ### Project Overview
 This project focuses on Single Image Depth Estimation (monocular depth estimation), which involves predicting the depth value for every pixel in an RGB image. This task is crucial in fields like autonomous vehicles, robotics, and augmented reality, and is particularly challenging due to the high variability in image structure and composition.
